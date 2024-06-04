@@ -16,5 +16,14 @@ namespace learn_devexpress
         {
             InitializeComponent();
         }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            sqlQuery sql = new sqlQuery();
+
+            Task<DataTable> res = sql.GetProducts();
+
+            gridControl1.DataSource = await res;
+        }
     }
 }

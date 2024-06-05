@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace learn_devexpress
 {
@@ -20,7 +21,7 @@ namespace learn_devexpress
             {
                 using (SqlConnection con = new SqlConnection(stCon))
                 {
-                    using (SqlCommand com = new SqlCommand("procProductListReport", con))
+                    using (SqlCommand com = new SqlCommand("dbo.procProductListReport", con))
                     {
                         com.CommandType = CommandType.StoredProcedure;
 
@@ -38,7 +39,7 @@ namespace learn_devexpress
                     typeName = m.Field<string>("typeName"),
                     productId = m.Field<int>("idProduct"),
                     productName = m.Field<string>("productName"),
-                    Price = m.Field<decimal>("Price"),
+                    Price = m.Field<int>("Price"),
                     barCode = m.Field<string>("barcode"),
                 }).ToList();
 
@@ -47,7 +48,7 @@ namespace learn_devexpress
             }
             catch(Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.ToString(), "Ошибка");
             }
 
             return listprod;

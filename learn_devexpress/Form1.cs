@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.XtraReports.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,22 @@ namespace learn_devexpress
             Task<DataTable> res = sql.GetProducts();
 
             gridControl1.DataSource = await res;
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            ProductReport report = new ProductReport();
+
+            clsQuery query = new clsQuery();
+
+            List<ProductList> list = query.GetProductListReport();
+
+            report.DataSource = list;
+            report.Parameters["rManager"].Value = textEdit1.EditValue;
+
+            report.RequestParameters = false;
+            report.ShowPreview();
+
         }
     }
 }
